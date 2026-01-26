@@ -25,10 +25,3 @@ if uploaded_file is not None:
     else:
         st.write("Prediction: **Normal**")
 
-       
-import tensorflow as tf
-
-# after training your model
-model.save("pneumonia_cnn_model.keras", save_format="keras")
-
-
