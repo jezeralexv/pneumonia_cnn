@@ -75,13 +75,15 @@ history = model.fit(
 loss, acc = model.evaluate(test_ds)
 print(f"Test accuracy: {acc:.2f}")
 
+# ✅ Save in modern Keras 3 format
+model.save("pneumonia_cnn_model.keras")
 
-#Save
-model.save("pneumonia_cnn_model.h5")
-
+# ✅ Plot training history
 import matplotlib.pyplot as plt
 
 plt.plot(history.history['accuracy'], label='train acc')
 plt.plot(history.history['val_accuracy'], label='val acc')
+plt.xlabel("Epochs")
+plt.ylabel("Accuracy")
 plt.legend()
 plt.show()

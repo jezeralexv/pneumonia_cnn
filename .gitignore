@@ -9,9 +9,23 @@ __pycache__/
 
 # Ignore datasets and large files
 data/
-*.h5
 *.ckpt
 
 $ archive/
 archive.zip
 pneumonia_env
+
+# Ignore dataset folder
+archive/
+
+# Ignore large model files
+*.h5
+
+# Ignore images
+*.jpg
+*.jpeg
+*.png
+
+# Ignore random text files
+New Text Document.txt
+$ public

@@ -24,3 +24,4 @@ if prediction[0][0] > 0.5:
     print("Prediction: Pneumonia")
 else:
     print("Prediction: Normal")
+    
