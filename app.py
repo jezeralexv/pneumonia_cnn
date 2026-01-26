@@ -25,4 +25,7 @@ if uploaded_file is not None:
     else:
         st.write("Prediction: **Normal**")
 
+        model.save("pneumonia_cnn_model.keras", save_format="keras")
+
+
 
