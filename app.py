@@ -25,3 +25,12 @@ if uploaded_file is not None:
         st.write("Prediction: **Pneumonia**")
     else:
         st.write("Prediction: **Normal**")
+
+
+import tensorflow as tf
+
+# Load the converted model
+model = tf.keras.models.load_model("pneumonia_cnn_model.keras")
+
+# Later in your app, use model.predict(...)
+
