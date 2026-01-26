@@ -1,12 +1,11 @@
 import tensorflow as tf
 import numpy as np
 
-# Save after training
-model.save("pneumonia_cnn_model.h5")
+# ✅ Save after training in proper Keras v3 format
+model.save("pneumonia_cnn_model.keras", save_format="keras")
 
-
-# Load your trained model (after saving it)
-model = tf.keras.models.load_model("pneumonia_cnn_model.h5")
+# ✅ Load your trained model (new format)
+model = tf.keras.models.load_model("pneumonia_cnn_model.keras")
 
 # Path to the new X-ray image
 img_path = r"C:\pneumonia project\pneumonia_cnn\chestray.jpg"
