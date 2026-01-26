@@ -74,3 +74,14 @@ history = model.fit(
 # ✅ Evaluate
 loss, acc = model.evaluate(test_ds)
 print(f"Test accuracy: {acc:.2f}")
+
+
+#Save
+model.save("pneumonia_cnn_model.h5")
+
+import matplotlib.pyplot as plt
+
+plt.plot(history.history['accuracy'], label='train acc')
+plt.plot(history.history['val_accuracy'], label='val acc')
+plt.legend()
+plt.show()
