@@ -30,5 +30,11 @@ archive/
 New Text Document.txt
 $ public
 
-$ tf15_env/
-$ public/
+# Ignore conversion script
+convert.py
+
+# Ignore public build/artifacts
+public/
+
+# Ignore local virtual environment
+tf15_env/
