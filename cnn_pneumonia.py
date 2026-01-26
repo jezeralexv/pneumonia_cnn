@@ -1,8 +1,9 @@
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
+import matplotlib.pyplot as plt
 
-# ✅ Data directory
+# ✅ Data directory (local training only — not for Streamlit Cloud)
 data_dir = r"C:\pneumonia project\pneumonia_cnn\archive\chest_xray"
 
 # ✅ Load datasets
@@ -54,9 +55,11 @@ model = keras.Sequential([
 ])
 
 # ✅ Compile
-model.compile(optimizer='adam',
-              loss='binary_crossentropy',
-              metrics=['accuracy'])
+model.compile(
+    optimizer='adam',
+    loss='binary_crossentropy',
+    metrics=['accuracy']
+)
 
 # ✅ Learning rate scheduler
 lr_schedule = keras.callbacks.ReduceLROnPlateau(
@@ -75,12 +78,10 @@ history = model.fit(
 loss, acc = model.evaluate(test_ds)
 print(f"Test accuracy: {acc:.2f}")
 
-# ✅ Save in modern Keras 3 format
+# ✅ Save in modern Keras v3 format
 model.save("pneumonia_cnn_model.keras")
 
 # ✅ Plot training history
-import matplotlib.pyplot as plt
-
 plt.plot(history.history['accuracy'], label='train acc')
 plt.plot(history.history['val_accuracy'], label='val acc')
 plt.xlabel("Epochs")

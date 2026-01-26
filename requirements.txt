@@ -1,5 +1,13 @@
+# Core ML framework
 tensorflow==2.20.0
-streamlit
-numpy
-pillow
-scikit-learn
+
+# Streamlit for deployment
+streamlit==1.39.0
+
+# Data handling
+numpy==1.26.4
+pandas==2.2.2
+
+# Visualization
+matplotlib==3.9.2
+
