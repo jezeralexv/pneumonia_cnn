@@ -1,11 +1,9 @@
 import tensorflow as tf
 import numpy as np
 
-# ✅ Save after training in proper Keras v3 format
-model.save("pneumonia_cnn_model.keras", save_format="keras")
-
-# ✅ Load your trained model (new format)
+# ✅ Load your trained model (already saved during training)
 model = tf.keras.models.load_model("pneumonia_cnn_model.keras")
+print("Model loaded successfully!")
 
 # Path to the new X-ray image
 img_path = r"C:\pneumonia project\pneumonia_cnn\chestray.jpg"
@@ -23,4 +21,3 @@ if prediction[0][0] > 0.5:
     print("Prediction: Pneumonia")
 else:
     print("Prediction: Normal")
-    

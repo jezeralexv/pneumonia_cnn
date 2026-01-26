@@ -38,3 +38,9 @@ public/
 
 # Ignore local virtual environment
 tf15_env/
+
+# Ignore large files and datasets
+archive/
+*.keras
+*.h5
+*.ckpt

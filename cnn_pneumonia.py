@@ -3,24 +3,18 @@ from tensorflow import keras
 from tensorflow.keras import layers
 import matplotlib.pyplot as plt
 
-# ✅ Data directory (local training only — not for Streamlit Cloud)
+# ✅ Data directory
 data_dir = r"C:\pneumonia project\pneumonia_cnn\archive\chest_xray"
 
 # ✅ Load datasets
 train_ds = tf.keras.utils.image_dataset_from_directory(
-    data_dir + "/train",
-    image_size=(150, 150),
-    batch_size=32
+    data_dir + "/train", image_size=(150, 150), batch_size=32
 )
 val_ds = tf.keras.utils.image_dataset_from_directory(
-    data_dir + "/val",
-    image_size=(150, 150),
-    batch_size=32
+    data_dir + "/val", image_size=(150, 150), batch_size=32
 )
 test_ds = tf.keras.utils.image_dataset_from_directory(
-    data_dir + "/test",
-    image_size=(150, 150),
-    batch_size=32
+    data_dir + "/test", image_size=(150, 150), batch_size=32
 )
 
 # ✅ Normalize + Prefetch
@@ -42,9 +36,9 @@ base_model = tf.keras.applications.MobileNetV2(
     include_top=False,
     weights='imagenet'
 )
-base_model.trainable = False  # freeze pretrained layers
+base_model.trainable = False
 
-# ✅ Final model
+# ✅ Final model (define AFTER augmentation + base_model)
 model = keras.Sequential([
     data_augmentation,
     base_model,
@@ -55,31 +49,22 @@ model = keras.Sequential([
 ])
 
 # ✅ Compile
-model.compile(
-    optimizer='adam',
-    loss='binary_crossentropy',
-    metrics=['accuracy']
-)
-
-# ✅ Learning rate scheduler
-lr_schedule = keras.callbacks.ReduceLROnPlateau(
-    monitor='val_loss', factor=0.2, patience=3, min_lr=1e-6
-)
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 # ✅ Train
-history = model.fit(
-    train_ds,
-    validation_data=val_ds,
-    epochs=10,
-    callbacks=[lr_schedule]
-)
+lr_schedule = keras.callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=3, min_lr=1e-6)
+history = model.fit(train_ds, validation_data=val_ds, epochs=10, callbacks=[lr_schedule])
 
 # ✅ Evaluate
 loss, acc = model.evaluate(test_ds)
 print(f"Test accuracy: {acc:.2f}")
 
-# ✅ Save in modern Keras v3 format
+# ✅ Save
 model.save("pneumonia_cnn_model.keras")
+
+# ✅ Reload (optional check)
+model = tf.keras.models.load_model("pneumonia_cnn_model.keras")
+print("Model loaded successfully!")
 
 # ✅ Plot training history
 plt.plot(history.history['accuracy'], label='train acc')
