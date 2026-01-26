@@ -1,1 +1,5 @@
-git-filter-repo==2.47.0
+streamlit
+tensorflow
+numpy
+matplotlib
+scikit-learn
