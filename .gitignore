@@ -29,3 +29,6 @@ archive/
 # Ignore random text files
 New Text Document.txt
 $ public
+
+$ tf15_env/
+$ public/
