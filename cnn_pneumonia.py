@@ -19,3 +19,39 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
 print("CNN model is built and compiled successfully!")
+
+import tensorflow as tf
+
+data_dir = r"C:\pneumonia project\pneumonia_cnn\archive\chest_xray"
+
+train_ds = tf.keras.utils.image_dataset_from_directory(
+    data_dir + "/train",
+    image_size=(150, 150),
+    batch_size=32
+)
+
+val_ds = tf.keras.utils.image_dataset_from_directory(
+    data_dir + "/val",
+    image_size=(150, 150),
+    batch_size=32
+)
+
+test_ds = tf.keras.utils.image_dataset_from_directory(
+    data_dir + "/test",
+    image_size=(150, 150),
+    batch_size=32
+)
+AUTOTUNE = tf.data.AUTOTUNE
+
+train_ds = train_ds.map(lambda x, y: (x/255.0, y)).cache().prefetch(buffer_size=AUTOTUNE)
+val_ds   = val_ds.map(lambda x, y: (x/255.0, y)).cache().prefetch(buffer_size=AUTOTUNE)
+test_ds  = test_ds.map(lambda x, y: (x/255.0, y)).cache().prefetch(buffer_size=AUTOTUNE)
+
+history = model.fit(
+    train_ds,
+    validation_data=val_ds,
+    epochs=10
+)
+
+loss, acc = model.evaluate(test_ds)
+print(f"Test accuracy: {acc:.2f}")
