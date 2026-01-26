@@ -11,3 +11,7 @@ __pycache__/
 data/
 *.h5
 *.ckpt
+
+$ archive/
+archive.zip
+pneumonia_env
