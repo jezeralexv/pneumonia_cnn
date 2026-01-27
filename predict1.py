@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
 
-# ✅ Load your trained model (already saved during training)
+# Load your trained model
 model = tf.keras.models.load_model("pneumonia_cnn_model.keras")
 print("Model loaded successfully!")
 
@@ -15,9 +15,16 @@ img_array = np.expand_dims(img_array, axis=0) / 255.0             # add batch di
 
 # Predict
 prediction = model.predict(img_array)
+prob = prediction[0][0]
 
-# Interpret result
-if prediction[0][0] > 0.5:
-    print("Prediction: Pneumonia")
+# Interpret result + severity
+if prob > 0.5:
+    if prob > 0.9:
+        severity = "Severe (high confidence)"
+    elif prob > 0.7:
+        severity = "Moderate"
+    else:
+        severity = "Mild"
+    print(f"Prediction: Pneumonia — {severity} [{prob:.2f}]")
 else:
-    print("Prediction: Normal")
+    print(f"Prediction: Normal [{1 - prob:.2f}]")
