@@ -20,7 +20,7 @@ prob = prediction[0][0]
 # Interpret result + severity
 if prob > 0.5:
     if prob > 0.9:
-        severity = "Severe (high confidence)"
+        severity = "Severe"
     elif prob > 0.7:
         severity = "Moderate"
     else:
