@@ -28,3 +28,4 @@ if prob > 0.5:
     print(f"Prediction: Pneumonia — {severity} [{prob:.2f}]")
 else:
     print(f"Prediction: Normal [{1 - prob:.2f}]")
+
